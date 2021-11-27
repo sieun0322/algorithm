@@ -12,66 +12,66 @@ public class RegularExpressionMatching_010 {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		String P = "mis*is*ip*."; // output: bab
-		String S = "mississippi"; // output: bab
+		String P = "a*"; // output: bab
+		String S = "aa"; // output: bab
 		System.out.println(isMatch(S, P));
 	}
 
 	public static boolean isMatch(String s, String p) {
 		try {
-			int p_idx = 0;
-			char compareChar;
-			for (int idx = 0; idx < s.length(); idx++) {
-				compareChar = p.charAt(p_idx);
-
+			int start_idx = 0;
+			int start_p_idx = 0;
+			int p_length = 0;
+			String compare_p;
+			String compare_s;
+			for (int p_idx = 0; p_idx <p.length(); p_idx++) {
 				System.out.println("============");
-				System.out.println(p_idx + ":" + compareChar);
-				System.out.println(idx + ":" + s.charAt(idx));
-				if (compareChar == '*') {
-					compareChar = p.charAt(p_idx-1);
-					if (compareChar == s.charAt(idx)) {
-						
-					} else if (compareChar == '.') {
-						
-					} else {
-						p_idx++;
-						if (idx == (s.length() - 1) && p_idx == (p.length() - 1)
-								&& s.charAt(idx)==p.charAt(p_idx)) {
-							return true;
+				System.out.println("p_idx:" + p_idx);
+				compare_s = s.substring(start_idx,start_idx+1);
+				compare_p = p.substring(p_idx,p_idx+1);
+				System.out.println("S:" + compare_s);
+				System.out.println("P:" + compare_p);
+				String post_p  ="";
+				if(p_idx <p.length()-1) {
+				post_p= p.substring(p_idx+1,p_idx+2);
+				}
+				if (p.charAt(p_idx) == '*') {
+					String pre_p  = p.substring(p_idx-1,p_idx);
+					if(pre_p.equals(compare_s)) {
+						start_idx++;
+						compare_s = s.substring(start_idx,start_idx+1);
+						while(pre_p.equals(compare_s)) {
+							start_idx++;
+							compare_s = s.substring(start_idx,start_idx+1);
 						}
+					}else {
+						start_idx++;
 					}
-				} else if (compareChar == '.') {
-					p_idx++;
-				} else if (compareChar == s.charAt(idx)) {
-					p_idx++;
-				} else {
-					if(p_idx<p.length()-1) {
-						if(p.charAt(p_idx+1) == '*') {
-							idx--;
-							p_idx++;
-						}else {
-							return false;
-						}
+				}else if (p.charAt(p_idx) == '.') {
+					
+				}else {
+					
+					if(compare_p.equals(compare_s)) {
+						start_idx++;
+					}else if(post_p.equals("*")) {
+						start_idx++;
 					}else {
 						return false;
 					}
 				}
-				System.out.println(p_idx + "=" + (p.length()));
-				System.out.println(idx + "=" + (s.length() - 1));
-				if (idx == (s.length() - 1)) {
-					
-					while(p_idx<p.length()) {
-						if(p.charAt(p_idx) !='*') {
-							return false;
-						}
-						p_idx++;
-					}
-					return true;
-				}
+				
+			}
+			if(start_idx<s.length()) {
+				return false;
 			}
 		} catch (Exception e) {
 			return false;
 		}
 		return true;
 	}
+
+	public int[] solution(String[] record) {
+	        int[] answer = {};
+	        return answer;
+	    }
 }
