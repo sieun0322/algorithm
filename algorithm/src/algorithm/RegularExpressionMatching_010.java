@@ -4,7 +4,8 @@ import java.util.Stack;
 
 /**
  * 
- * @author zion
+ * @author zion 
+ * FAIL
  *
  */
 public class RegularExpressionMatching_010 {
