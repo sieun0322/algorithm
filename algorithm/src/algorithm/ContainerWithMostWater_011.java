@@ -5,7 +5,8 @@ import java.util.Stack;
 /**
  * 
  * @author zion 
- * Time Limit Exceeded
+ * Runtime: 3 ms, faster than 86.38% of Java online submissions for Container With Most Water.
+ * Memory Usage: 52.5 MB, less than 92.76% of Java online submissions for Container With Most Water.
  *
  */
 public class ContainerWithMostWater_011 {
@@ -17,17 +18,21 @@ public class ContainerWithMostWater_011 {
 	}
 
 	public static int maxArea(int[] height) {
-		int max = 0;
-		for (int start = 0; start < height.length; start++) {
-			for (int end = 0; end < height.length; end++) {
-				int w = end - start;
-				int h = height[start] < height[end] ? height[start] : height[end];
-				int size = w * h;
-				if (size > max)
-					max = size;
-			}
-		}
-		return max;
+	    int max = 0;
+        int start = 0;
+        int end = height.length - 1;
+    
+        while (end - start > 0) {
+	        int h = height[end] > height[start] ? height[start] : height[end];
+	        int size = (end - start) * h;
+	        
+	        if(height[end] > height[start]){
+	        	start++; 
+	        }else{ 
+	        	end--;
+	        }
+        max = max < size ? size : max;
+        }
+        return max;
 	}
-
 }
