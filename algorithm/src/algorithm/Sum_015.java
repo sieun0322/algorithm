@@ -12,9 +12,7 @@ import java.util.Stack;
 /**
  * 
  * @author zion 
- * Runtime: 28 ms, faster than 5.48% of Java online submissions for Integer to Roman.
- * Memory Usage: 39.4 MB, less than 46.20% of Java online submissions for Integer to Roman.
- *
+ * 
  *
  */
 public class Sum_015 {
