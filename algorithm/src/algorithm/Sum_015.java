@@ -20,8 +20,8 @@ public class Sum_015 {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		int[] height = { -1,0,1,2,-1,-4 };
-		System.out.println(threeSum(height));
+		int[] num = { -1,0,1,2,-1,-4 };
+		System.out.println(threeSum(num));
 	}
 	
 	public static List<List<Integer>> threeSum(int[] nums) {
