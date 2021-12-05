@@ -53,8 +53,11 @@ public class Sum_015 {
                     startIndex = j+1<plusStartIndex?plusStartIndex:j+1;
                     endIndex = nums.length;
                 }else if(i_num + j_num == 0){
-                    startIndex = j+1<plusStartIndex-1?plusStartIndex-1:j+1;
-                    endIndex = nums.length;
+                    if(j+1>plusStartIndex-1){
+                        break;
+                    }
+                    startIndex = plusStartIndex-1;
+                    endIndex = startIndex+1;
                 }else{
                     break;
                 }
@@ -68,6 +71,7 @@ public class Sum_015 {
 						temp.add(k_num);
 						temp.sort(null);
 						result.add(temp);
+                        break;
 					}
                     if(nums[0] == nums[nums.length-1]) return new ArrayList(result);
 				}
