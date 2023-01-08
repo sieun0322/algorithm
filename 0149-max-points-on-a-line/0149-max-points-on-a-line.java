@@ -32,7 +32,7 @@ class Solution {
                     //갯수Count
                     for(int i=cIdx+1; i<points.length; i++){
                         if((points[cIdx][1] - points[i][1])*tempX
-                            ==((tempY*points[cIdx][0]) - (tempY*points[i][0]))){
+                            ==(points[cIdx][0]- points[i][0])*tempY){
                             tempCnt++;
                         }
                     }
