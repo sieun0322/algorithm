@@ -2,7 +2,7 @@ class Solution {
     int result = 0;
     public int longestPath(int[] parent, String s) {
         List<Integer>[] list = new ArrayList[parent.length];
-        boolean[] visit = new boolean[parent.length];
+        boolean[] visited = new boolean[parent.length];
         for(int i = 0; i<list.length; i++){
             list[i] = new ArrayList<Integer>();
         }
@@ -13,17 +13,19 @@ class Solution {
             }
         }
         for(int i = 0; i<parent.length; i++){
-           search(i,list, visit);
+            if(!visited[i]){
+                search(i,list, visited);
+            }
         }
         return result;
     }
-    public int search(int target, List<Integer>[] lst, boolean[] visited) {
-        visited[target] = true;
+    public int search(int target, List<Integer>[] lst, boolean[] v) {
+        v[target] = true;
         int max1 = 0;
         int max2 = 0;
         for(int i = 0; i<lst[target].size(); i++){
-            if(!visited[lst[target].get(i)]){
-                int temp = search(lst[target].get(i), lst, visited);
+            if(!v[lst[target].get(i)]){
+                int temp = search(lst[target].get(i), lst, v);
                 if(temp>max1){
                     max2 = max1;
                     max1 = temp;
