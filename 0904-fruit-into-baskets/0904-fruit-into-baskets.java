@@ -9,24 +9,18 @@ class Solution {
             if(pair1==pair2){
                 temp++;
             }else{
-                temp = maxCnt(fruits,i+1,temp);
+                for(int j = i+1; j<fruits.length; j++){
+                    if(fruits[j] == pair1|| fruits[j] == pair2) {
+                         temp++;
+                     }else{
+                         break;
+                     }
+                }
                 result = result > temp ? result: temp;
                 
                 temp = 1;
             }
         }
         return result > temp ? result: temp;
-    }
-    public int maxCnt(int[] f, int idx, int tempCnt){
-        int result = 1; 
-        int temp = tempCnt;
-        for(int j = idx; j<f.length; j++){
-         if(f[j] == f[idx-1] || f[j] == f[idx]) {
-             temp++;
-         }else{
-             break;
-         }
-        }
-        return result > temp? result:temp;
     }
 }
