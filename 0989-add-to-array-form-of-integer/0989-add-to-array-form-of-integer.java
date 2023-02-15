@@ -1,6 +1,5 @@
 class Solution {
     public List<Integer> addToArrayForm(int[] num, int k) {
-        int size = 1;
         int x = 0;
         List<Integer> result = new LinkedList();
         int i = num.length-1;
