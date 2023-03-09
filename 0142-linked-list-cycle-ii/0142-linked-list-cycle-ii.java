@@ -11,14 +11,14 @@
  */
 public class Solution {
     public ListNode detectCycle(ListNode head) {
-        List<ListNode> visited = new LinkedList<ListNode>();
+        List<ListNode> visited = new ArrayList<ListNode>();
         
         ListNode result = head;
         while(result != null){
             visited.add(result);
             result = result.next;
-            for(ListNode node: visited){
-                if(node == result) return node;
+            if(visited.contains(result)){
+                return result;
             }
         }
         return null;
