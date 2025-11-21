@@ -13,6 +13,7 @@ study evidence
 ## Hash Table
 |  |
 | ------- |
+| [0383-ransom-note](https://github.com/sieun0322/algorithm/tree/master/0383-ransom-note) |
 | [3501-delete-nodes-from-linked-list-present-in-array](https://github.com/sieun0322/algorithm/tree/master/3501-delete-nodes-from-linked-list-present-in-array) |
 | [3610-find-x-sum-of-all-k-long-subarrays-i](https://github.com/sieun0322/algorithm/tree/master/3610-find-x-sum-of-all-k-long-subarrays-i) |
 ## Linked List
@@ -30,6 +31,7 @@ study evidence
 ## String
 |  |
 | ------- |
+| [0383-ransom-note](https://github.com/sieun0322/algorithm/tree/master/0383-ransom-note) |
 | [1700-minimum-time-to-make-rope-colorful](https://github.com/sieun0322/algorithm/tree/master/1700-minimum-time-to-make-rope-colorful) |
 ## Dynamic Programming
 |  |
@@ -47,4 +49,8 @@ study evidence
 |  |
 | ------- |
 | [3610-find-x-sum-of-all-k-long-subarrays-i](https://github.com/sieun0322/algorithm/tree/master/3610-find-x-sum-of-all-k-long-subarrays-i) |
+## Counting
+|  |
+| ------- |
+| [0383-ransom-note](https://github.com/sieun0322/algorithm/tree/master/0383-ransom-note) |
 <!---LeetCode Topics End-->
