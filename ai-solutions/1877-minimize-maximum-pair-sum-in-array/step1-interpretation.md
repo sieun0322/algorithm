@@ -1,47 +1,49 @@
-# Problem Interpretation: LeetCode 1877 - Minimize Maximum Pair Sum in Array
+# Problem Interpretation: Minimize Maximum Pair Sum in Array
 
 ## 1. Problem Restatement
 
-You are given an array of integers with an **even number of elements**. Your task is to pair up all the elements into groups of two, where:
-- Every element must be used exactly once
-- Every element belongs to exactly one pair
-- You end up with exactly n/2 pairs (where n is the array length)
+You are given an array of integers with an even number of elements. Your task is to divide all elements into pairs (groups of exactly two elements). Each element must belong to exactly one pair, and no element can be left unpaired or used in multiple pairs.
 
-Each pair has a "pair sum" (the sum of its two elements). Among all the pairs you create, there will be a maximum pair sum. Your goal is to find a way to pair the elements such that this maximum pair sum is **as small as possible**.
+For each pair, you calculate its sum. Among all these pair sums, there will be a maximum value. Your goal is to find the pairing arrangement that makes this maximum pair sum as small as possible.
 
-You need to return what that minimized maximum pair sum is.
+In other words: you want to pair up all elements in a way that avoids creating any pair with an unnecessarily large sum.
+
+---
 
 ## 2. Input Format
 
-- **nums**: An integer array of even length n
-- Example: `[3, 5, 2, 3]`
+- A single array `nums` containing integers
+- The array length `n` is always even
+- Each element is a positive integer
+
+---
 
 ## 3. Output Format
 
-- A single integer representing the minimized maximum pair sum
-- Example: `7` (if pairs are (2,5) and (3,3), the maximum pair sum is max(7, 6) = 7)
+- A single integer representing the smallest possible value of the maximum pair sum across all valid pairing arrangements
+
+---
 
 ## 4. Constraints
 
-- `n == nums.length`
-- `2 <= n <= 10^5` (array length between 2 and 100,000)
-- `n` is **even** (guaranteed)
-- `1 <= nums[i] <= 10^5` (each element is between 1 and 100,000)
+| Constraint | Value |
+|------------|-------|
+| Array length `n` | 2 to 100,000 |
+| Parity of `n` | Always even |
+| Element values | 1 to 100,000 |
+
+---
 
 ## 5. Pitfalls
 
-1. **Optimization goal clarity**: You are minimizing the MAXIMUM pair sum, not the total sum of all pairs or the average. This is a minimax problem.
+1. **Not a total sum problem**: You are not minimizing the total sum of all pairs (which would be the same regardless of pairing). You are minimizing the *maximum* among the individual pair sums.
 
-2. **All elements must be paired**: You cannot leave any element unpaired or use any element more than once.
+2. **All elements must be used exactly once**: You cannot skip elements or reuse them. Every element must appear in exactly one pair.
 
-3. **Large input size**: With n up to 10^5, a brute-force approach trying all possible pairings would be computationally infeasible.
+3. **Greedy intuition can mislead**: It might seem tempting to pair similar values together, but the examples show this is not always optimal (e.g., pairing 6 with 2 rather than with a larger number).
 
-4. **Greedy intuition needed**: The problem requires finding an optimal pairing strategy, not just any valid pairing.
+4. **Large input size**: With up to 100,000 elements, any approach with high time complexity (such as trying all possible pairings) will not work within time limits.
 
-5. **Distinguishing from similar problems**: This is NOT about finding the minimum pair sum or minimizing total sum - it specifically asks for minimizing the worst-case (maximum) pair sum.
+5. **Duplicate values exist**: The array can contain duplicate values, so you cannot assume all elements are unique when reasoning about pairings.
 
-6. **Example walkthrough**: For `[3, 5, 2, 3]`:
-   - One pairing: (3,5) and (2,3) → max(8, 5) = 8
-   - Another pairing: (3,2) and (5,3) → max(5, 8) = 8
-   - Another pairing: (3,3) and (5,2) → max(6, 7) = 7
-   - The answer is 7 (the best possible maximum)
+6. **The answer is about the worst pair**: Even if most pairs have small sums, one bad pairing can ruin the result. The focus is entirely on the largest pair sum.
