@@ -7,6 +7,7 @@ study evidence
 |  |
 | ------- |
 | [1700-minimum-time-to-make-rope-colorful](https://github.com/sieun0322/algorithm/tree/master/1700-minimum-time-to-make-rope-colorful) |
+| [1877-minimize-maximum-pair-sum-in-array](https://github.com/sieun0322/algorithm/tree/master/1877-minimize-maximum-pair-sum-in-array) |
 | [2343-count-unguarded-cells-in-the-grid](https://github.com/sieun0322/algorithm/tree/master/2343-count-unguarded-cells-in-the-grid) |
 | [3501-delete-nodes-from-linked-list-present-in-array](https://github.com/sieun0322/algorithm/tree/master/3501-delete-nodes-from-linked-list-present-in-array) |
 | [3610-find-x-sum-of-all-k-long-subarrays-i](https://github.com/sieun0322/algorithm/tree/master/3610-find-x-sum-of-all-k-long-subarrays-i) |
@@ -41,6 +42,7 @@ study evidence
 |  |
 | ------- |
 | [1700-minimum-time-to-make-rope-colorful](https://github.com/sieun0322/algorithm/tree/master/1700-minimum-time-to-make-rope-colorful) |
+| [1877-minimize-maximum-pair-sum-in-array](https://github.com/sieun0322/algorithm/tree/master/1877-minimize-maximum-pair-sum-in-array) |
 ## Sliding Window
 |  |
 | ------- |
@@ -53,4 +55,12 @@ study evidence
 |  |
 | ------- |
 | [0383-ransom-note](https://github.com/sieun0322/algorithm/tree/master/0383-ransom-note) |
+## Two Pointers
+|  |
+| ------- |
+| [1877-minimize-maximum-pair-sum-in-array](https://github.com/sieun0322/algorithm/tree/master/1877-minimize-maximum-pair-sum-in-array) |
+## Sorting
+|  |
+| ------- |
+| [1877-minimize-maximum-pair-sum-in-array](https://github.com/sieun0322/algorithm/tree/master/1877-minimize-maximum-pair-sum-in-array) |
 <!---LeetCode Topics End-->
