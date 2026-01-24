@@ -30,53 +30,71 @@ if [ ! -f "${SOLUTIONS_DIR}/problem.txt" ]; then
     exit 1
 fi
 
-echo "[Step 1/6] Running Interpreter Agent..."
-claude --print "$(cat ${AGENTS_DIR}/interpreter.txt)
+echo "[Step 1/8] Running Interpreter Agent..."
+claude --print "$(cat ${AGENTS_DIR}/interpreter.md)
 
-$(cat ${SOLUTIONS_DIR}/problem.txt)" > "${SOLUTIONS_DIR}/step1-interpretation.txt"
-echo "  -> step1-interpretation.txt"
+$(cat ${SOLUTIONS_DIR}/problem.txt)" > "${SOLUTIONS_DIR}/step1-interpretation.md"
+echo "  -> step1-interpretation.md"
 
-echo "[Step 2/6] Running Strategy Agent..."
-claude --print "$(cat ${AGENTS_DIR}/strategy.txt)
+echo "[Step 2/8] Running Strategy Agent..."
+claude --print "$(cat ${AGENTS_DIR}/strategy.md)
 
-$(cat ${SOLUTIONS_DIR}/step1-interpretation.txt)" > "${SOLUTIONS_DIR}/step2-strategy.txt"
-echo "  -> step2-strategy.txt"
+$(cat ${SOLUTIONS_DIR}/step1-interpretation.md)" > "${SOLUTIONS_DIR}/step2-strategy.md"
+echo "  -> step2-strategy.md"
 
-echo "[Step 3/6] Running Blind Tester Agent (parallel)..."
-claude --print "$(cat ${AGENTS_DIR}/tester-blind.txt)
+echo "[Step 3/8] Running Tester Agent (Blind Mode, parallel)..."
+claude --print "$(cat ${AGENTS_DIR}/tester.md)
 
-$(cat ${SOLUTIONS_DIR}/step1-interpretation.txt)" > "${SOLUTIONS_DIR}/step3-test-blind.txt" &
+Problem (No solution code - Blind Mode):
+$(cat ${SOLUTIONS_DIR}/step1-interpretation.md)" > "${SOLUTIONS_DIR}/step3-test-cases.md" &
 BLIND_PID=$!
 
-echo "[Step 4/6] Running Implementation Agent..."
-claude --print "$(cat ${AGENTS_DIR}/implementation.txt)
+echo "[Step 4/8] Running Implementation Agent..."
+claude --print "$(cat ${AGENTS_DIR}/implementation.md)
 
-$(cat ${SOLUTIONS_DIR}/step2-strategy.txt)" > "${SOLUTIONS_DIR}/step4-solution.java"
+$(cat ${SOLUTIONS_DIR}/step2-strategy.md)" > "${SOLUTIONS_DIR}/step4-solution.java"
 echo "  -> step4-solution.java"
 
 # Wait for blind tester
 wait $BLIND_PID
-echo "  -> step3-test-blind.txt"
+echo "  -> step3-test-cases.md"
 
-echo "[Step 5/6] Running Code Tester Agent..."
-claude --print "$(cat ${AGENTS_DIR}/tester-code.txt)
+echo "[Step 5/8] Running Test Coder Agent (Blind Tests)..."
+claude --print "$(cat ${AGENTS_DIR}/test-coder.md)
 
-Problem:
-$(cat ${SOLUTIONS_DIR}/problem.txt)
+Test Case Analysis:
+$(cat ${SOLUTIONS_DIR}/step3-test-cases.md)" > "${SOLUTIONS_DIR}/step5-test.java"
+echo "  -> step5-test.java"
 
-Solution:
-$(cat ${SOLUTIONS_DIR}/step4-solution.java)" > "${SOLUTIONS_DIR}/step5-test-code.txt"
-echo "  -> step5-test-code.txt"
-
-echo "[Step 6/6] Running Optimizer Agent..."
-claude --print "$(cat ${AGENTS_DIR}/optimizer.txt)
+echo "[Step 6/8] Running Tester Agent (Code Analysis Mode)..."
+claude --print "$(cat ${AGENTS_DIR}/tester.md)
 
 Problem:
 $(cat ${SOLUTIONS_DIR}/problem.txt)
 
 Solution:
-$(cat ${SOLUTIONS_DIR}/step4-solution.java)" > "${SOLUTIONS_DIR}/step6-optimization.txt"
-echo "  -> step6-optimization.txt"
+$(cat ${SOLUTIONS_DIR}/step4-solution.java)" > "${SOLUTIONS_DIR}/step6-test-cases.md"
+echo "  -> step6-test-cases.md"
+
+echo "[Step 7/8] Running Test Coder Agent (Add Code Analysis Tests)..."
+claude --print "$(cat ${AGENTS_DIR}/test-coder.md)
+
+Additional Test Case Analysis:
+$(cat ${SOLUTIONS_DIR}/step6-test-cases.md)
+
+Existing Test Code (add new tests to this, preserve all existing tests):
+$(cat ${SOLUTIONS_DIR}/step5-test.java)" > "${SOLUTIONS_DIR}/step7-test.java"
+echo "  -> step7-test.java"
+
+echo "[Step 8/8] Running Optimizer Agent..."
+claude --print "$(cat ${AGENTS_DIR}/optimizer.md)
+
+Problem:
+$(cat ${SOLUTIONS_DIR}/problem.txt)
+
+Solution:
+$(cat ${SOLUTIONS_DIR}/step4-solution.java)" > "${SOLUTIONS_DIR}/step8-optimization.md"
+echo "  -> step8-optimization.md"
 
 echo ""
 echo "=== Pipeline Complete ==="
