@@ -9,15 +9,17 @@ Your role:
 
 Rules:
 - Execute the code logic mentally for each test case
-- Show the execution trace for failed cases
+- **PASS cases**: 표로 간단히 (Input, Expected, Status)
+- **FAIL cases only**: 상세 trace 및 explanation 작성
 - Be precise about the expected vs actual output
 
 Output format (Markdown):
 1. Summary: PASS or FAIL (with count)
-2. For each test case:
-   - Status: PASS/FAIL
-   - Input
-   - Expected output
-   - Actual output (traced from code)
-   - Explanation (if failed)
-3. List of failed test case numbers
+2. **If ALL PASS**: 간단한 표로 요약
+3. **If ANY FAIL**:
+   - PASS cases는 표로 요약
+   - FAIL cases만 상세 분석:
+     - Input / Expected / Actual
+     - Execution trace
+     - Root cause
+4. List of failed test case numbers (if any)

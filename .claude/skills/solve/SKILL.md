@@ -20,8 +20,8 @@ When the user invokes this skill:
 
 1. **폴더 생성**: `ai-solutions/{problem_number}-{problem_name}/` 폴더를 생성합니다.
 
-2. **problem.txt 확인**: 해당 폴더에 problem.txt가 있는지 확인합니다.
-   - 없으면: 사용자에게 문제 내용을 요청하고 problem.txt를 생성합니다.
+2. **problem.md 확인**: 해당 폴더에 problem.md가 있는지 확인합니다.
+   - 없으면: 사용자에게 문제 내용을 요청하고 problem.md를 생성합니다.
    - 있으면: 다음 단계로 진행합니다.
 
 3. **파이프라인 실행**:
@@ -35,7 +35,7 @@ When the user invokes this skill:
                                          ↓
                                       PASS!
                                          ↓
-          [test-coder:blind] → [tester:code] → [test-coder:final] → [optimizer]
+                    [tester:code] → [test-coder] → [optimizer]
    ```
 
    - **Step 1 (Interpreter)**: 문제 해석 → `step1-interpretation.md`
@@ -43,25 +43,23 @@ When the user invokes this skill:
    - **Step 3 (Tester:Blind)**: 블라인드 테스트 케이스 → `step3-test-cases.md`
    - **Step 4 (Implementation)**: 코드 구현 → `step4-solution.java`
    - **Step 5 (Test & Fix Loop)**: 테스트 실행 및 수정 (최대 3회) → `step5-test-result.md`
-   - **Step 6 (Test-Coder:Blind)**: 블라인드 테스트 코드 → `step6-test.java`
-   - **Step 7 (Tester:Code)**: 코드 분석 테스트 케이스 → `step7-test-cases.md`
-   - **Step 8 (Test-Coder:Final)**: 최종 테스트 코드 → `step8-test.java`
-   - **Step 9 (Optimizer)**: 최적화 분석 → `step9-optimization.md`
+   - **Step 6 (Tester:Code)**: 코드 분석 테스트 케이스 → `step6-test-cases.md`
+   - **Step 7 (Test-Coder)**: 최종 테스트 코드 → `step7-test.java`
+   - **Step 8 (Optimizer)**: 최적화 분석 → `step8-optimization.md`
 
 ## Output Structure
 
 ```
 ai-solutions/{problem_number}-{problem_name}/
- ├── problem.txt
+ ├── problem.md
  ├── step1-interpretation.md
  ├── step2-strategy.md
  ├── step3-test-cases.md      ← 블라인드 테스트 케이스
  ├── step4-solution.java      ← 최종 솔루션 (수정 반영)
  ├── step5-test-result.md     ← 테스트 실행 결과
- ├── step6-test.java          ← 블라인드 테스트 코드
- ├── step7-test-cases.md      ← 코드 분석 테스트 케이스
- ├── step8-test.java          ← 최종 테스트 코드
- └── step9-optimization.md
+ ├── step6-test-cases.md      ← 코드 분석 테스트 케이스
+ ├── step7-test.java          ← 최종 테스트 코드 (블라인드 + 코드분석)
+ └── step8-optimization.md
 ```
 
 ## Agents
@@ -75,7 +73,16 @@ ai-solutions/{problem_number}-{problem_name}/
 - `test-coder.md` - 테스트 코드 작성
 - `optimizer.md` - 최적화 분석
 
+## Token Efficiency Guidelines
+
+1. **Agent 파일 병렬 읽기**: 필요한 agent 파일들을 한 번에 병렬로 Read
+2. **Test Result 간소화**:
+   - ALL PASS → 표로 요약
+   - FAIL만 상세 trace
+3. **중복 제거**: 중간 산출물 최소화 (step6 블라인드 테스트 코드 제거)
+4. **간결한 출력**: 각 step 파일은 핵심만 작성
+
 ## Notes
 
 - Step 5에서 테스트 실패 시 최대 3회까지 자동 수정 시도
-- step8-test.java가 최종 테스트 파일 (블라인드 + 코드분석)
+- step7-test.java가 최종 테스트 파일 (블라인드 + 코드분석 통합)
