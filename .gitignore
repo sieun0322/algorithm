@@ -1,1 +1,7 @@
 token.txt
+
+# IntelliJ IDE
+.idea/
+
+# Compiled Java class files
+algorithm/bin/
